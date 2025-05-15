@@ -47,10 +47,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Database connection setup
 const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root', // **IMPORTANT: Use a less privileged user in production**
-    password: 'happy4lyf', // **IMPORTANT: Use environment variables or a secure method for credentials**
-    database: 'pawlog_db'
+     host: process.env.DB_HOST, // Access the value of the DB_HOST environment variable
+    user: process.env.DB_USER, // Access the value of the DB_USER environment variable
+    password: process.env.DB_PASSWORD, // Access the value of the DB_PASSWORD environment variable
+    database: process.env.DB_NAME // Access the value of the DB_NAME environment variable
 });
 
 db.connect(err => {
