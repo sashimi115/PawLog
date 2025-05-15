@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan&display=swap" rel="stylesheet">
+    <title>PawLog Signup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+                <div class="topbar">
+            <div class="navbar">
+                <a href="loginpage.html" class="navbar-title">
+                    <img src="images/paw-icon.png" alt="Paw Icon" class="paw-icon">
+                    PAWLOG</a>
+            </div>
+        </div>
+
+        <div class = "main-content">
+            <div class="login-container">                 
+                <h2>Create an Account</h2>
+                <form id="signup-form">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="input-field" required>
+                    <p id="username-error" class="error-message" style="color: red; display: none;"></p>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="input-field" required>
+                    <p id="email-error" class="error-message" style="color: red; display: none;"></p>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="input-field" required>
+                    <p id="password-error" class="error-message" style="color: red; display: none;"></p>
+
+                    <button type="submit" class="login-btn">Sign Up</button>
+                </form>
+                <p style="text-align:center; margin-top: 10px;">Already have an account? <a href="loginpage.html" class="sign-up-link">Log in here</a></p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <footer class="footer">
+                <div class="footer-content">
+                <p>2025 PawLog. Samantha Shaina Julia N. Badelles | CCC151 IT2D Final Project</p>
+                </div>
+            </footer>
+        </footer>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+</html>

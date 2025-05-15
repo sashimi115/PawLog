@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawLog - Vet Visits</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="topbar">
+            <div class="navbar">
+                <a href="index.html" class="navbar-title">
+                    <img src="images/paw-icon.png" alt="Paw Icon" class="paw-icon">
+                    PAWLOG
+                </a>
+                <a href="profilepage.html" class="nav-item">PROFILE</a>
+                <a href="pets.html" class="nav-item">PETS</a>
+                <div class="dropdown">
+                    <div class="dropdown-btn">SERVICES <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="vaccination.html" class="dropdown-item">Vaccinations</a>
+                        <a href="vetvisits.html" class="dropdown-item active">Vet Visits</a>
+                        <a href="feedinglogs.html" class="dropdown-item">Feeding Logs</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="dropdown-btn">DATA <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="exportdata.html" class="dropdown-item">Export Data</a>
+                        <a href="backup.html" class="dropdown-item">Backup Data</a>
+                    </div>
+                </div>
+                <a href="loginpage.html" id="signInOutButton" class="nav-item sign-in-btn">SIGN IN</a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="not-logged-in" class="message" style="display: none;">
+                <p>You need to be logged in to view vet visit records.</p>
+            </div>
+
+            <div id="vet-visits-content" style="display: none;">
+                <h1>Vet Visit Records</h1>
+
+                <div class="input-group">
+                    <label for="pet-select">Select Pet:</label>
+                    <select id="pet-select" class="input-field">
+                        <option value="" disabled selected>--Select a Pet--</option>
+                        </select>
+                </div>
+
+                 <div id="no-pets-message" class="message" style="display: none;">
+                    <p>You don't have any pets added yet. Please go to <a href="pets.html">My Pets</a> to add one.</p>
+                </div>
+
+                <h2 id="selected-pet-name-heading" style="display: none;">
+                    Vet Visit Records for <span id="selected-pet-name"></span>
+                </h2>
+
+                <div class="controls-container" id="vet-visits-controls" style="display: none;">
+                    <label for="sort-by">Sort by:</label>
+                    <select id="sort-by">
+                        <option value="visit_date">Visit Date</option>
+                        <option value="clinic_name">Clinic Name</option>
+                        <option value="vet_name">Vet Name</option>
+                        <option value="reason">Reason</option>
+                        <!-- Add other sortable fields -->
+                    </select>
+
+                    <label for="sort-direction">Order:</label>
+                    <select id="sort-direction">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+
+                    <label for="search-input">Search:</label>
+                    <input type="text" id="search-input-vet-visits" placeholder="Filter visits...">
+                </div>
+
+                <p id="select-pet-message-vet-visits" style="display: none;">Please select a pet to view vet visit records.</p>
+                <p id="no-vet-visits-message" style="display: none;">No vet visit records found for this pet.</p>
+                <p id="no-records-after-filter-vet-visits" style="display: none;">No vet visit records match your filter criteria.</p>
+
+                <div id="vet-visits-container">
+                    <table id="vet-visits-table" class="vet-visit-table" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Visit Date</th>
+                                <th>Clinic Name</th>
+                                <th>Vet Name</th>
+                                <th>Reason</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vet-visits-table-body">
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="add-record-btn" id="add-vet-visit-button" style="display: none;">+ Add Vet Visit</button>
+
+            </div>
+
+             <div id="vetVisitModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeVetVisitModal()">&times;</span>
+                    <h2 id="modal-title">Add Vet Visit Record</h2>
+                    <form id="vetVisitForm">
+                        <input type="hidden" id="visit-id">
+                        <input type="hidden" id="modal-pet-id"> <div class="input-group">
+                            <label for="visit-date">Visit Date:</label>
+                            <input type="date" id="visit-date" class="input-field" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="clinic-name">Clinic Name:</label>
+                            <input type="text" id="clinic-name" class="input-field">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="vet-name">Vet Name:</label>
+                            <input type="text" id="vet-name" class="input-field">
+                        </div>
+
+                         <div class="input-group">
+                            <label for="reason">Reason for Visit:</label>
+                            <textarea id="reason" class="input-field"></textarea>
+                        </div>
+
+                         <div class="input-group">
+                            <label for="notes">Notes (Optional):</label>
+                            <textarea id="notes" class="input-field"></textarea>
+                        </div>
+
+
+                        <div class="modal-buttons"> <button type="submit" id="save-vet-visit-button" class="save-btn">Save Record</button> <button type="button" id="delete-vet-visit-button" class="delete-btn" style="display: none;">Delete Record</button> </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+            <p>2025 PawLog. Samantha Shaina Julia N. Badelles | CCC151 IT2D Final Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="vetvisits.js"></script> </body>
+</html>

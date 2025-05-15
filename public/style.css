@@ -1,0 +1,1844 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Kodchasan', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures the footer stays at the bottom */
+}
+
+/* Navbar */
+.topbar {
+  position: relative;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar {
+    background-color: #e4adcc;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.navbar-title {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Kodchasan', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.paw-icon {
+    width: 30px; 
+    height: 30px;
+    margin-right: 10px;
+}
+
+.nav-item {
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-item:hover {
+    background-color: #fff7ee;
+    color: #e4adcc;
+}
+
+.nav-item.active {
+  background-color: #aa5f8a;
+  color: white;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-btn {
+    color: white;
+    padding: 16px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #e4adcc;
+    min-width: 160px;
+    z-index: 9999;
+}
+
+.dropdown-content .dropdown-item {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content .dropdown-item:hover {
+    background-color: #fff7ee;
+    color: #e4adcc;
+}
+
+/* Show on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-item.active {
+  background-color: #aa5f8a;
+  color: white;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: flex-start; /* Align items to the top */
+  align-items: center;
+  flex: 1; /* Takes remaining space */
+  position: relative; /* Ensure proper stacking */
+  z-index: 2; /* Higher z-index to keep it above the footer */
+  background-image: url(images/background\ 4.png);
+  background-size: cover;
+  background-position: center;
+}  
+
+.blur-background {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.2); /* Optional soft overlay */
+}
+
+.mySlides {
+  display: none;             /* Hide slides by default */
+  width: 100%;               /* Ensures full width */
+  height: 100%;              /* Ensures full height */
+  object-fit: cover;         /* Prevents image distortion */
+  position: relative;        
+  transition: transform 0.3s ease;
+}
+
+.mySlides.active {
+  transform: scale(1.05);     /* Slightly zoom in the active slide */
+  z-index: 2;                 /* Ensure active slide is on top */
+}
+
+.thumbnail-container {
+  display: flex;
+  flex-wrap: wrap; /* Ensures thumbnails wrap onto a new line if needed */
+  justify-content: center; /* Center the thumbnails */
+  gap: 10px; /* Adds space between thumbnails */
+  z-index: 10;
+  transition: all 0.3s ease; 
+  margin-bottom: 20px;
+}
+
+.thumbnail {
+  width: 100px; /* Set initial width of the thumbnails */
+  height: auto; /* Ensure the height is proportional */
+  margin: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  transition: transform 0.3s, opacity 0.3s, border-color 0.3s;
+  flex-shrink: 0; /* Prevent shrinking */
+  transition: transform 0.3s ease-in-out;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+  border-color: #2196F3;
+  transform: scale(1.5); /* Make the thumbnail bigger on hover */
+  z-index: 2; /* Bring the hovered thumbnail to the top */
+}
+
+.thumbnail.active {
+  opacity: 1;
+  border-color: #2196F3; /* Active thumbnail with border */
+  transform: scale(1.2); /* Make the active thumbnail slightly bigger */
+}
+
+.thumbnail-container .thumbnail:hover ~ .thumbnail {
+  transform: translateX(20px); /* Move the other thumbnails to the side */
+}
+
+.thumbnail-container .thumbnail:hover {
+  transform: scale(1.5) translateX(10px); /* Scale the hovered thumbnail and make room */
+}
+  
+  @keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+  }
+  
+  .slideshow-container {
+    position: relative;
+    max-width: 100%;
+    width: 70%;
+    margin: 20px auto 20px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    min-height: 300px;
+    border: 3px solid #e4adcc; /* Ensure the border is visible */
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: shadow for effect */
+    box-sizing: border-box; 
+    z-index: 2;
+  }
+
+  @media (max-width: 600px) {
+    .slideshow-container {
+      aspect-ratio: 4 / 3;
+    }
+    .main-content {
+      margin-bottom: 10px; /* Reduce margin for small screens */
+    }
+    .thumbnail-container {
+      margin-bottom: 20px;  /* Smaller margin for small screens */
+    }
+    .footer {
+      margin-top: 10px;  /* Smaller margin for small screens */
+    }
+  }
+
+  @media (max-width: 768px) {
+      #slideshow-section {
+      padding: 0 5%; /* Reduce padding on smaller screens */
+      min-height: 300px;
+      }
+    
+      .petSlideWrapper {
+      width: 80%; /* Make active slide take more width */
+      transform: translateX(-50%) scale(0.8); /* Adjust scale */
+      }
+    
+      .petSlideWrapper.active {
+      transform: translateX(-50%) scale(1);
+      }
+    
+      .petSlideWrapper.prev {
+      left: 10%; /* Adjust position */
+      }
+    
+      .petSlideWrapper.next {
+      left: 90%; /* Adjust position */
+      }
+    
+      .petSlides {
+      aspect-ratio: 3 / 2; /* Adjust aspect ratio */
+      }
+    }
+    
+    @media (max-width: 480px) {
+      #slideshow-section {
+      padding: 0 2%; /* Further reduce padding */
+      min-height: 250px;
+      }
+    
+      .petSlideWrapper {
+      width: 90%; /* Make active slide take more width */
+      transform: translateX(-50%) scale(0.9); /* Adjust scale */
+      }
+    
+      .petSlideWrapper.active {
+      transform: translateX(-50%) scale(1);
+      }
+    
+      .petSlideWrapper.prev,
+      .petSlideWrapper.next {
+      display: none; /* Hide side images on very small screens */
+      }
+    
+      .petSlides {
+      aspect-ratio: 1 / 1; /* Adjust aspect ratio */
+      }
+    
+      .petCaption {
+      font-size: 1em;
+      }
+    }
+  
+  .footer {
+    background-color: #e4adcc;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-family: 'Kodchasan', sans-serif;
+    position: relative;
+    z-index: 1; /* Lower z-index for footer to avoid overlap with main content */
+  }
+
+  .footer-content p {
+    margin: 8px 0;
+  }
+  
+  .footer-link {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: color 0.3s;
+    margin: 0 8px;
+}
+
+.footer-link:hover {
+    color: black;
+}
+
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #d79cb7;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Kodchasan', sans-serif;
+    color: #d79cb7;
+    font-weight: bold;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e4adcc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.password-input-field {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e4adcc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #e4adcc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #d79cb7;
+}
+
+.sign-up-link {
+  text-decoration: none;
+  color: #d79cb7;
+  font-size: 18px;
+  transition: color 0.3s;
+  margin: 0 8px;
+}
+
+.sign-up-link:hover {
+  color: black;
+}
+
+.sign-in-btn {
+  background-color: #96c6b5;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Kodchasan', sans-serif;
+  text-decoration: none;
+}
+
+.sign-in-btn:hover {
+  background-color: #147251;
+  color: white;
+}
+
+.sign-out-btn {
+  background-color: #cd5e5e;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Kodchasan', sans-serif;
+  text-decoration: none;
+}
+
+.sign-out-btn:hover {
+  background-color: #c11a1a;
+  color: white;
+}
+
+.profile-container {
+  min-width: 30%;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profile-info {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+#profile-edit {
+  display: none;
+}
+
+.profile-picture {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.profile-info p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.edit-btn {
+  background-color: #e4adcc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.edit-btn:hover {
+  background-color: #d78db4;
+}
+
+.save-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn {
+  padding: 10px 20px;
+  background-color: #af4c4c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+.delete-btn:hover {
+  background-color: #951c1c;
+}
+
+.change-password-btn {
+  padding: 10px 20px;
+  background-color: #af4c82;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+.change-password-btn:hover {
+  background-color: #9e3770;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="tel"],
+.input-group input[type="date"],
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e4adcc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+.pets {
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.welcome-message {
+      text-align: center;
+      font-size: 2em;
+      color: #d79cb7;
+      margin-top: 20px;
+      z-index: 3;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: bolder;
+    }
+  
+  /* Pets Grid Container */
+  #pets-grid-container {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+     gap: 20px; /* Space between pet cards */
+     width: 100%;
+     max-width: 900px; /* Limit the maximum width of the grid */
+     margin: 30px auto; /* Center the grid */
+     padding: 0 20px; /* Add some horizontal padding */
+     box-sizing: border-box;
+     z-index: 3;
+     border: #e4adcc;
+     border-radius: 20px;
+     border-width: 20px;
+     align-content: center;
+  }
+  
+    #no-pets-message {
+      text-align: center;
+      font-size: 1.5em;
+      color: #555;
+      margin-top: 50px;
+      z-index: 3;
+    }
+
+    #not-logged-in {
+      text-align: center;
+      font-size: 1.5em;
+      color: #555;
+      margin-top: 50px;
+      z-index: 3;
+    }
+  
+  .add-pet-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  .add-pet-btn:hover {
+    background-color: #e25454;
+  }
+
+  .add-pet-tooltip {
+    visibility: hidden; /* Hidden by default */
+    width: 100px; /* Adjust width as needed */
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute; /* Position relative to the button */
+    z-index: 1;
+    bottom: 100%; /* Position above the button */
+    left: 50%;
+    margin-left: -50px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.5em; /* Adjust font size */
+    white-space: nowrap; /* Prevent text wrapping */
+ }
+
+ /* Show the tooltip text on hover */
+ .add-pet-btn:hover .add-pet-tooltip {
+    visibility: visible;
+    opacity: 1;
+ }
+  
+  /* Modal Styles (General) - Keep existing */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999; /* Ensure modals are above everything else */
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    padding-top: 50px;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    /* Add max-height and overflow if content might exceed modal size */
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+    font-family: 'Kodchasan', sans-serif;
+    text-align: center; /* Center modal titles */
+    margin-bottom: 20px; /* Add space below title */
+  }
+  
+  .modal-content input:not([type="radio"]), /* Exclude radios from general input styles */
+  .modal-content textarea {
+    width: 100%;
+    margin: 8px 0 16px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-family: 'Kodchasan', sans-serif;
+    box-sizing: border-box; /* Include padding and border in element's total width */
+  }
+  
+  .modal-content button[type="submit"] { /* Style for "Add Pet" button */
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .modal-content button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+  }
+  .close:hover {
+    color: #000;
+  }
+  
+  /* Add Pet Modal Specific Styles - Keep existing */
+  .radio-group {
+    display: inline-flex;
+    gap: 20px;
+    margin-left: 10px;
+    align-items: center;
+  }
+  
+  .radio-option {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 5px;
+  }
+  
+  /* Pet Details/Edit Modal Specific Styles */
+  
+  .view-mode-only {
+      display: block; /* Default display for spans/text in view mode */
+  }
+  
+  .edit-mode-only {
+      display: none; /* Hidden by default in view mode */
+  }
+  
+  /* Style for the pet detail image container (both view and edit) */
+  .pet-detail-image-container {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px; /* Add some space below the image area */
+      border-bottom: 1px solid #eee; /* Optional separator */
+  }
+  
+  #pet-detail-image { /* The view mode image */
+      display: block; /* Center the image */
+      max-width: 100%;
+      height: auto; /* Maintain aspect ratio */
+      margin: 0 auto 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  
+  /* Style for detail rows (both view and edit) */
+  .detail-group {
+      margin-bottom: 15px; /* Increased space between detail rows */
+      display: flex; /* Align label and value/input */
+      align-items: flex-start; /* Align items to the top in the row */
+      flex-wrap: wrap; /* Allow items to wrap if needed */
+  }
+  
+  .detail-group strong {
+      display: inline-block;
+      width: 80px; /* Fixed width for labels */
+      margin-right: 10px;
+      flex-shrink: 0; /* Prevent label from shrinking */
+      padding-top: 5px; /* Align label text better with input/span */
+  }
+  
+  /* Styles for value spans in view mode */
+  .detail-group .view-mode-only {
+      flex-grow: 1; /* Allow span to take up remaining space */
+      word-break: break-word; /* Break long words */
+  }
+  
+  
+  /* Styles for inputs/textarea in edit mode */
+  .detail-group .edit-mode-only.input-field {
+      flex-grow: 1; /* Allow input to take up remaining space */
+      width: auto; /* Override the calc width */
+      margin: 0; /* Remove default margins */
+      padding: 8px; /* Add padding */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Kodchasan', sans-serif;
+      box-sizing: border-box;
+  }
+  
+  /* Special style for textarea in edit mode */
+  .detail-group .edit-mode-only textarea.input-field {
+      height: 80px; /* Set a fixed height for the textarea */
+      resize: vertical; /* Allow vertical resizing */
+  }
+  
+  /* Style for radio group in edit mode */
+  .detail-group .edit-mode-only .radio-group {
+      display: none;
+      gap: 20px;
+      align-items: center;
+      flex-grow: 1; /* Allow radio group to take remaining space */
+      margin-left: 0; /* Remove default margin */
+      padding-top: 5px; /* Align with label */
+  }
+  
+  /* Style for buttons container */
+  .modal-buttons {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 10px; /* Add space above buttons */
+      border-top: 1px solid #eee; /* Optional separator */
+      display: flex; /* Enable flex layout */
+      justify-content: center; /* Center items horizontally */
+      align-items: center; /* Center items vertically (if they have different heights) */
+      gap: 10px;
+  }
+  
+  .modal-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Kodchasan', sans-serif;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+      margin: 0 5px; /* Space between buttons */
+  }
+  
+  .edit-btn {
+      background-color: #007bff; /* Blue color for edit */
+      color: white;
+  }
+  .edit-btn:hover {
+      background-color: #0056b3;
+  }
+  
+  .save-btn {
+      background-color: #28a745; /* Green color for save */
+      color: white;
+  }
+  .save-btn:hover {
+      background-color: #218838;
+  }
+  
+  
+  /* When the modal is in edit mode, reverse visibility */
+  .modal.edit-mode .view-mode-only {
+      display: none;
+  }
+  
+  .modal.edit-mode .edit-mode-only {
+      display: block;
+  }
+  
+  /* Ensure radio buttons are visible and aligned correctly in edit mode */
+  .modal.edit-mode .edit-mode-only.radio-group {
+       display: flex; /* Keep horizontal layout */
+  }
+  
+  /* Style for the file input *when in edit mode* */
+  /* This input has the class .edit-mode-only in HTML */
+  .modal.edit-mode #edit-pet-image-upload.edit-mode-only {
+        display: block; /* Ensure it takes its own line when visible */
+        margin: 10px auto; /* Center the file input when visible */
+    }
+
+#vaccination-content {
+  background-color: rgba(255, 255, 255, 0.9); 
+  border-radius: 8px; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); 
+  padding: 30px; 
+  max-width: 900px; 
+  width: 100%; 
+  margin: 20px auto; 
+}
+  
+/* Vaccination Page Title */
+#vaccination-content h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+    color: #d79cb7; /* A shade of purple from your theme for titles */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Message for no vaccination records */
+#no-vaccination-message {
+    font-size: 1.2em;
+    color: #777;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #fdfdfd;
+    text-align: center; /* Ensures the message text is centered */
+}
+
+/* Select Pet Dropdown */
+#pet-select {
+    padding: 10px;
+    border: 1px solid #e4adcc; /* Matches your existing input-field border */
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%; /* Take full width of its container */
+    box-sizing: border-box;
+    margin-bottom: 15px; /* Space below the select */
+}
+
+#pet-select:focus {
+    border-color: #aa5f8a; /* Focus color aligned with theme */
+    box-shadow: 0 0 5px rgba(170, 95, 138, 0.5); /* Focus shadow */
+    outline: none;
+}
+
+.add-record-btn {
+    display: block;
+    width: auto;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #aa5f8a; /* Darker theme color, consistent with add record button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Kodchasan', sans-serif; /* Consistent font */
+    font-weight: bold; /* Make it bold */
+}
+
+.add-record-btn:hover {
+    background-color: #8c4f7a; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Vaccination Modal (using existing .modal and .modal-content styles) */
+#vaccinationModal .modal-content h2#modal-title {
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+    color: #d79cb7; /* Consistent title color */
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* Ensure modal input fields match existing input-field styles */
+#vaccinationModal .input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e4adcc; /* Existing input field border color */
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#vaccinationModal .input-field:focus {
+    border-color: #aa5f8a; /* Existing input field focus color */
+    box-shadow: 0 0 5px rgba(170, 95, 138, 0.5);
+    outline: none;
+}
+
+/* Modal Buttons for Vaccination Form - Reusing existing .save-btn, .delete-btn */
+#vaccinationModal .modal-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px; /* Space between buttons */
+    margin-top: 30px;
+    padding-top: 15px; /* Add padding above buttons */
+    border-top: 1px solid #eee; /* Optional separator */
+}
+
+/* Style for the vaccination table */
+#vaccination-table {
+    width: 100%; /* Make the table take full width of its container */
+    border-collapse: collapse; /* Collapse borders so they don't double up */
+    margin-bottom: 20px; /* Space below the table */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: Add a subtle shadow */
+    background-color: #fff; /* Optional: Set background color for the table */
+}
+
+/* Style for table headers (titles) */
+#vaccination-table th {
+    background-color: #f2f2f2; /* Light grey background for headers */
+    color: #333; /* Darker text color */
+    font-weight: bold; /* Make the text bold */
+    text-align: left; /* Align header text to the left */
+    padding: 12px 15px; /* Add padding */
+    border: 1px solid #ddd; /* Add a light grey border */
+}
+
+/* Style for table data cells */
+#vaccination-table td {
+    padding: 10px 15px; /* Add padding */
+    border: 1px solid #ddd; /* Add a light grey border */
+    text-align: left; /* Align cell text to the left */
+    vertical-align: top; /* Align content to the top in case of multi-line text */
+}
+
+/* Style for alternating table rows for better readability */
+#vaccination-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Slightly different background for even rows */
+}
+
+/* Style for table row hover effect */
+#vaccination-table tbody tr:hover {
+    background-color: #e9e9e9; /* Highlight row on hover */
+}
+
+/* Style for the actions column to prevent buttons from breaking layout */
+#vaccination-table td.record-actions {
+    white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+/* Style for the buttons within the table cells */
+#vaccination-table td .edit-record-btn,
+#vaccination-table td .delete-record-btn {
+    padding: 5px 10px;
+    margin-right: 5px; /* Space between buttons */
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+#vaccination-table td .edit-record-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+#vaccination-table td .edit-record-btn:hover {
+    background-color: #0056b3;
+}
+
+#vaccination-table td .delete-record-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+#vaccination-table td .delete-record-btn:hover {
+    background-color: #c82333;
+}
+
+#feeding-logs-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 30px;
+    max-width: 900px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+/* Feeding Logs Page Title */
+#feeding-logs-content h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+    color: #d79cb7; /* A shade of purple from your theme for titles */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Message for no feeding logs or no pets */
+#no-feeding-logs-message,
+#no-pets-message { /* Added #no-pets-message */
+    font-size: 1.2em;
+    color: #777;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #fdfdfd;
+    text-align: center;
+}
+
+/* Select Pet Dropdown - Reusing .input-group and .input-field styles from style.css */
+/* If .input-group and .input-field are only in vaccination.css, you might need to move them to style.css or duplicate */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e4adcc; /* Matches your existing input-field border */
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #aa5f8a; /* Focus color aligned with theme */
+    box-shadow: 0 0 5px rgba(170, 95, 138, 0.5); /* Focus shadow */
+    outline: none;
+}
+
+
+/* Add Feeding Log Button - Using the same style as add-vaccination-button */
+#add-feedinglog-button { /* Changed ID */
+    display: block;
+    width: auto;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #aa5f8a; /* Darker theme color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+    position: relative; /* Needed for tooltip positioning */
+}
+
+#add-feedinglog-button:hover {
+    background-color: #8c4f7a; /* Darker shade on hover */
+    transform: translateY(-2px);
+}
+
+.modal-content h2#modal-title {
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+    color: #d79cb7;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* Input groups within the modal */
+#feedingLogModal .input-group {
+     margin-bottom: 20px; /* Increased spacing */
+}
+
+#feedingLogModal .input-group label {
+     margin-bottom: 8px;
+     font-size: 1.1em; /* Slightly larger labels */
+}
+
+#feedingLogModal .input-field {
+     /* Inherits styles from .input-field above */
+     margin-bottom: 0; /* Remove extra margin if input-group provides it */
+}
+
+/* Textarea specific style */
+#feedingLogModal textarea.input-field {
+    min-height: 100px; /* Give textarea some height */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+
+/* Modal Buttons for Feeding Log Form - Using the same classes */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px; /* Space between buttons */
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* Save and Delete Buttons - Reusing existing classes */
+.save-btn { /* Style for Save buttons */
+    padding: 10px 20px;
+    background-color: #aa5f8a; /* Theme color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+}
+
+.save-btn:hover {
+    background-color: #8c4f7a;
+}
+
+.delete-btn { /* Style for Delete buttons */
+    padding: 10px 20px;
+    background-color: #dc3545; /* Red for delete */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #555; /* Darker on hover */
+    text-decoration: none;
+}
+
+
+/* Styles for the Feeding Logs Table - Adapted from vaccination table */
+.feeding-log-table { /* Changed class name */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 8px; /* Added border-radius to the table */
+    overflow: hidden; /* Hide overflow for rounded corners */
+}
+
+/* Style for table headers (titles) */
+.feeding-log-table th { /* Changed class name */
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    font-family: 'Kodchasan', sans-serif; /* Apply theme font */
+}
+
+/* Style for table data cells */
+.feeding-log-table td { /* Changed class name */
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+    font-family: 'Fredoka', sans-serif; /* Apply theme font */
+    color: #555; /* Slightly darker text */
+}
+
+/* Style for alternating table rows for better readability */
+.feeding-log-table tbody tr:nth-child(even) { /* Changed class name */
+    background-color: #f9f9f9;
+}
+
+/* Style for table row hover effect */
+.feeding-log-table tbody tr:hover { /* Changed class name */
+    background-color: #e9e9e9;
+}
+
+/* Style for the actions column to prevent buttons from breaking layout */
+.feeding-log-table td.log-actions { /* Changed class name */
+    white-space: nowrap;
+}
+
+/* Style for the buttons within the table cells */
+.feeding-log-table td .edit-log-btn, /* Changed class names */
+.feeding-log-table td .delete-log-btn { /* Changed class names */
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Kodchasan', sans-serif; /* Apply theme font */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.feeding-log-table td .edit-log-btn { /* Changed class name */
+    background-color: #007bff; /* Standard blue */
+    color: white;
+}
+
+.feeding-log-table td .edit-log-btn:hover { /* Changed class name */
+    background-color: #0056b3;
+}
+
+.feeding-log-table td .delete-log-btn { /* Changed class name */
+    background-color: #dc3545; /* Standard red */
+    color: white;
+}
+
+.feeding-log-table td .delete-log-btn:hover { /* Changed class name */
+    background-color: #c82333;
+}
+
+/* Responsive adjustments (adapt as needed based on your style.css) */
+@media (max-width: 768px) {
+    #feeding-logs-content {
+        padding: 20px;
+    }
+
+    #feeding-logs-content h1 {
+        font-size: 2em;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .feeding-log-table th,
+    .feeding-log-table td {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .feeding-log-table td.log-actions {
+        white-space: normal; /* Allow wrapping if needed on small screens */
+    }
+
+     .feeding-log-table td .edit-log-btn,
+     .feeding-log-table td .delete-log-btn {
+        padding: 4px 8px;
+        font-size: 0.8em;
+        margin-right: 3px;
+     }
+
+    .modal-buttons {
+        flex-direction: column; /* Stack buttons in modal on small screens */
+        align-items: stretch; /* Make buttons full width */
+        gap: 10px;
+    }
+
+    .modal-buttons button {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+    }
+}
+
+#vet-visits-content { /* Changed ID */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 30px;
+    max-width: 900px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+/* Vet Visits Page Title */
+#vet-visits-content h1 { /* Changed ID */
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+    color: #d79cb7; /* A shade of purple from your theme for titles */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Message for no vet visit records or no pets */
+#no-vet-visits-message, /* Changed ID */
+#no-pets-message { /* Reused ID */
+    font-size: 1.2em;
+    color: #777;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #fdfdfd;
+    text-align: center;
+}
+
+/* Select Pet Dropdown - Reusing .input-group and .input-field styles from style.css */
+/* If .input-group and .input-field are only in other specific CSS files, you might need to move them to style.css or duplicate */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e4adcc; /* Matches your existing input-field border */
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #aa5f8a; /* Focus color aligned with theme */
+    box-shadow: 0 0 5px rgba(170, 95, 138, 0.5); /* Focus shadow */
+    outline: none;
+}
+
+
+/* Add Vet Visit Button - Using the same style as add-vaccination-button */
+#add-vet-visit-button { /* Changed ID */
+    display: block;
+    width: auto;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #aa5f8a; /* Darker theme color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+    position: relative; /* Needed for tooltip positioning */
+}
+
+#add-vet-visit-button:hover {
+    background-color: #8c4f7a; /* Darker shade on hover */
+    transform: translateY(-2px);
+}
+
+/* Input groups within the modal */
+#vetVisitModal .input-group { /* Changed parent ID */
+     margin-bottom: 20px; /* Increased spacing */
+}
+
+#vetVisitModal .input-group label { /* Changed parent ID */
+     margin-bottom: 8px;
+     font-size: 1.1em; /* Slightly larger labels */
+}
+
+#vetVisitModal .input-field { /* Changed parent ID */
+     /* Inherits styles from .input-field above */
+     margin-bottom: 0; /* Remove extra margin if input-group provides it */
+}
+
+/* Textarea specific style */
+#vetVisitModal textarea.input-field { /* Changed parent ID */
+    min-height: 100px; /* Give textarea some height */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+
+/* Modal Buttons for Vet Visit Form - Using the same classes */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px; /* Space between buttons */
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* Save and Delete Buttons - Reusing existing classes */
+.save-btn { /* Style for Save buttons */
+    padding: 10px 20px;
+    background-color: #aa5f8a; /* Theme color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+}
+
+.save-btn:hover {
+    background-color: #8c4f7a;
+}
+
+.delete-btn { /* Style for Delete buttons */
+    padding: 10px 20px;
+    background-color: #dc3545; /* Red for delete */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #555; /* Darker on hover */
+    text-decoration: none;
+}
+
+
+/* Styles for the Vet Visits Table - Adapted from vaccination table */
+.vet-visit-table { /* Changed class name */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 8px; /* Added border-radius to the table */
+    overflow: hidden; /* Hide overflow for rounded corners */
+}
+
+/* Style for table headers (titles) */
+.vet-visit-table th { /* Changed class name */
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    font-family: 'Kodchasan', sans-serif; /* Apply theme font */
+}
+
+/* Style for table data cells */
+.vet-visit-table td { /* Changed class name */
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+    font-family: 'Fredoka', sans-serif; /* Apply theme font */
+    color: #555; /* Slightly darker text */
+}
+
+/* Style for alternating table rows for better readability */
+.vet-visit-table tbody tr:nth-child(even) { /* Changed class name */
+    background-color: #f9f9f9;
+}
+
+/* Style for table row hover effect */
+.vet-visit-table tbody tr:hover { /* Changed class name */
+    background-color: #e9e9e9;
+}
+
+/* Style for the actions column to prevent buttons from breaking layout */
+.vet-visit-table td.visit-actions { /* Changed class name */
+    white-space: nowrap;
+}
+
+/* Style for the buttons within the table cells */
+.vet-visit-table td .edit-visit-btn, /* Changed class names */
+.vet-visit-table td .delete-visit-btn { /* Changed class names */
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Kodchasan', sans-serif; /* Apply theme font */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.vet-visit-table td .edit-visit-btn { /* Changed class name */
+    background-color: #007bff; /* Standard blue */
+    color: white;
+}
+
+.vet-visit-table td .edit-visit-btn:hover { /* Changed class name */
+    background-color: #0056b3;
+}
+
+.vet-visit-table td .delete-visit-btn { /* Changed class name */
+    background-color: #dc3545; /* Standard red */
+    color: white;
+}
+
+.vet-visit-table td .delete-visit-btn:hover { /* Changed class name */
+    background-color: #c82333;
+}
+
+/* Responsive adjustments (adapt as needed based on your style.css) */
+@media (max-width: 768px) {
+    #vet-visits-content { /* Changed ID */
+        padding: 20px;
+    }
+
+    #vet-visits-content h1 { /* Changed ID */
+        font-size: 2em;
+    }
+
+    .vet-visit-table th, /* Changed class name */
+    .vet-visit-table td { /* Changed class name */
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .vet-visit-table td.visit-actions { /* Changed class name */
+        white-space: normal; /* Allow wrapping if needed on small screens */
+    }
+
+     .vet-visit-table td .edit-visit-btn, /* Changed class names */
+     .vet-visit-table td .delete-visit-btn { /* Changed class names */
+        padding: 4px 8px;
+        font-size: 0.8em;
+        margin-right: 3px;
+     }
+  }
+
+  /* Basic styling for the export page content */
+.export-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 30px;
+    max-width: 700px;
+    width: 100%;
+    margin: 20px auto;
+    font-family: 'Fredoka', sans-serif;
+    color: #555;
+}
+
+.export-container h1 {
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+    color: #d79cb7; /* A shade of purple from your theme */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.export-options h3 {
+    font-family: 'Kodchasan', sans-serif;
+    color: #aa5f8a; /* Darker theme color */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.checkbox-group, .radio-group {
+    margin-bottom: 20px;
+}
+
+.checkbox-group label, .radio-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+  .checkbox-group input[type="checkbox"],
+  .radio-group input[type="radio"] {
+    margin-right: 8px;
+    vertical-align: middle;
+    /* Custom styling for checkboxes/radios if needed */
+  }
+
+.export-button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#export-btn {
+    padding: 12px 25px;
+    background-color: #aa5f8a; /* Darker theme color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: bold;
+}
+
+#export-btn:hover {
+    background-color: #8c4f7a; /* Darker shade on hover */
+    transform: translateY(-2px);
+}
+
+#export-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+  .message {
+      font-size: 1.2em;
+      color: #777;
+      padding: 20px;
+      border: 1px dashed #ccc;
+      border-radius: 5px;
+      margin-top: 30px;
+      background-color: #fdfdfd;
+      text-align: center;
+  }
+
+.controls-container {
+    display: flex; /* Arrange children in a row */
+    justify-content: space-between; /* Space out the sort and search containers */
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 20px; /* Add some space below the controls */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    gap: 15px; /* Add space between flex items */
+    padding: 0 20px; /* Add padding on the sides */
+}
+
+.sort-container,
+.search-container {
+    display: flex; /* Arrange label and input/select in a row */
+    align-items: center;
+    /* flex-grow: 1; /* Optional: allow containers to grow and take up space */
+}
+
+.controls-container label {
+    margin-right: 10px; /* Space between label and input/select */
+    font-weight: bold;
+    color: #333; /* Adjust color to match your design */
+    font-family: 'Fredoka', sans-serif; /* Use a font from your imports */
+}
+
+#sort-by,
+#search-input,
+#sort-direction {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem;
+    font-family: 'Lato', sans-serif; /* Use a font from your imports */
+    color: #555; /* Adjust color */
+    outline: none; /* Remove default outline on focus */
+    transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+}
+
+#sort-by:focus,
+#search-input:focus
+#sort-direction:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25); /* Add a subtle shadow */
+}
+
+#sort-by {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) { /* Adjust breakpoint as needed */
+    .controls-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: stretch; /* Stretch items to fill width */
+    }
+
+    .sort-container,
+    .search-container {
+        width: 100%; /* Make them take full width */
+        margin-bottom: 10px; /* Add space between stacked items */
+    }
+
+    .sort-container label,
+    .search-container label {
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 5px; /* Add margin below label when stacked */
+        display: block; /* Make labels block elements when stacked */
+    }
+}
+
+.pet-card {
+    /* Existing styles for the card container */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures image corners match card corners */
+    text-align: center;
+    padding-bottom: 15px; /* Add padding at the bottom */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer; /* Indicate it's clickable */
+    transition: transform 0.2s ease-in-out; /* Add hover effect */
+}
+
+.pet-card:hover {
+    transform: translateY(-5px); /* Lift card slightly on hover */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.pet-card img {
+    width: 100%;
+    height: 150px; /* Or auto, depending on desired image size */
+    object-fit: cover; /* Cover the area without distorting aspect ratio */
+    margin-bottom: 10px; /* Space below the image */
+}
+
+.pet-card h3 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 8px; /* Space below the name */
+    color: #333; /* Adjust name color */
+    font-family: 'Fredoka', sans-serif; /* Match header font */
+    padding: 0 10px; /* Add some horizontal padding */
+}
+
+.pet-card-details {
+    padding: 0 10px; /* Padding for the details block */
+    text-align: left; /* Align text left within the details block */
+    font-size: 0.9rem; /* Smaller font for details */
+    color: #555; /* Adjust details color */
+    font-family: 'Lato', sans-serif; /* Match body font */
+}
+
+.pet-card-details p {
+    margin: 4px 0; /* Space between detail lines */
+    line-height: 1.4;
+}
+

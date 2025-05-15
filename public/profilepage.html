@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>User Profile</title>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="topbar">
+            <div class="navbar">
+                <a href="index.html" class="navbar-title">
+                    <img src="images/paw-icon.png" alt="Paw Icon" class="paw-icon">
+                    PAWLOG
+                </a>
+                <a href="profilepage.html" class="nav-item active">PROFILE</a>
+                <a href="pets.html" class="nav-item">PETS</a>
+                <div class="dropdown">
+                    <div class="dropdown-btn">SERVICES <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="vaccination.html" class="dropdown-item">Vaccinations</a>
+                        <a href="vetvisits.html" class="dropdown-item">Vet Visits</a>
+                        <a href="feedinglogs.html" class="dropdown-item">Feeding Logs</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="dropdown-btn">DATA <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="exportdata.html" class="dropdown-item">Export Data</a>
+                        <a href="backup.html" class="dropdown-item">Backup Data</a>
+                    </div>
+                </div>
+                <a href="loginpage.html" id="signInOutButton" class="nav-item sign-in-btn">SIGN IN</a>
+            </div>
+        </div>
+
+        <div class = "main-content">
+            <div id="not-logged-in" style="display: none;">
+                <p>You are not logged in, log in first!</p>
+            </div>
+            <div class="profile-container" id="profile-view">
+                <h2>User Profile</h2>
+                <div class="profile-picture">
+                    <img src="images/default-profile.jpg" alt="Profile Picture" class="profile-img" id="profile-pic-view">
+                </div>
+                <div class="profile-info">
+                    <p><strong>Username:</strong> <span id="display-username"></span></p>
+                    <p><strong>Name:</strong> <span id="display-name"></span></p>
+                    <p><strong>Birthday:</strong> <span id="display-birthday"></span></p>
+                    <p><strong>Email:</strong> <span id="display-email"></span></p>
+                    <p><strong>Contact Number:</strong> <span id="display-contact"></span></p>
+                    <p><strong>Bio:</strong> <span id="display-bio"></span></p>
+                </div>
+                <button class="edit-btn" onclick="enableEdit()">Edit Profile</button>
+                <button type="button" class="delete-btn" id="delete-account-button">Delete Account</button>
+                <button type="button" class="change-password-btn" onclick="showChangePasswordForm()">Change Password</button>
+            </div>
+
+            <div class="profile-container" id="profile-edit">
+                <h2>Edit Profile</h2>
+                <form id="edit-profile-form" enctype="multipart/form-data">
+                    <div class="profile-picture">
+                        <label for="profile-pic-upload">Profile Picture:</label>
+                        <input type="file" id="profile-pic-upload" name="profile_picture" accept="image/*">
+                        <br>
+                        <img src="images/default-profile.jpg" alt="Profile Picture" class="profile-img" id="profile-pic-edit">
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="input-field" placeholder="Enter your username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="input-field" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="birthday">Birthday:</label>
+                        <input type="date" id="birthday" name="birthday" class="input-field" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="input-field" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="contact">Contact #:</label>
+                        <input type="tel" id="contact" name="contact" class="input-field" placeholder="Enter your contact number" required>
+                        <p id="contact-error-message" style="color: red; display: none;"></p>
+                    </div>
+                    <div class="input-group">
+                        <label for="bio">Bio:</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+                    <button type="submit" class="save-btn">Save Profile</button>
+                </form>
+            </div>
+
+            <div class="profile-container" id="change-password-section" style="display: none;">
+                <h2>Change Password</h2>
+                <form id="change-password-form">
+                    <div class="input-group">
+                        <label for="current-password">Current Password:</label>
+                        <input type="password" id="current-password" name="currentPassword" class="password-input-field" required>
+                        <p id="current-password-error" style="color: red; display: none;"></p>
+                    </div>
+                    <div class="input-group">
+                        <label for="new-password">New Password:</label>
+                        <input type="password" id="new-password" name="newPassword" class="password-input-field" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-new-password">Confirm New Password:</label>
+                        <input type="password" id="confirm-new-password" name="confirmNewPassword" class="password-input-field" required>
+                        <p id="password-match-error" style="color: red; display: none;">New passwords do not match.</p>
+                    </div>
+                    <button type="submit" class="save-btn">Update Password</button>
+                    <button type="button" class="delete-btn" onclick="hideChangePasswordForm()">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+            <p>2025 PawLog. Samantha Shaina Julia N. Badelles | CCC151 IT2D Final Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>

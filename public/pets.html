@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PawLog - Pets</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="topbar">
+            <div class="navbar">
+                <a href="index.html" class="navbar-title">
+                    <img src="images/paw-icon.png" alt="Paw Icon" class="paw-icon">
+                    PAWLOG
+                </a>
+                <a href="profilepage.html" class="nav-item">PROFILE</a>
+                <a href="pets.html" class="nav-item active">PETS</a>
+                <div class="dropdown">
+                    <div class="dropdown-btn">SERVICES <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="vaccination.html" class="dropdown-item">Vaccinations</a>
+                        <a href="vetvisits.html" class="dropdown-item">Vet Visits</a>
+                        <a href="feedinglogs.html" class="dropdown-item">Feeding Logs</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="dropdown-btn">DATA <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="exportdata.html" class="dropdown-item">Export Data</a>
+                        <a href="backup.html" class="dropdown-item">Backup Data</a>
+                    </div>
+                </div>
+                <a href="loginpage.html" id="signInOutButton" class="nav-item sign-in-btn">SIGN IN</a>
+            </div>
+        </div>
+
+        <div class="main-content" style="background-image: url(images/background%204.png); background-size: cover; background-position: center;">
+            <div class="pets">
+                <h1 id="welcome-header" class="welcome-message"></h1>
+
+                <div class="controls-container">
+                    <div class="sort-container">
+                        <label for="sort-by">Sort by:</label>
+                        <select id="sort-by">
+                            <option value="name">Name</option>
+                            <option value="type">Type</option>
+                            <option value="birthdate">Birthdate</option>
+                            <option value="sex">Sex</option>
+                        </select>
+                    </div>
+                    <div class="search-container">
+                        <label for="search-input">Search:</label>
+                        <input type="text" id="search-input" placeholder="Search by name, type, or breed">
+                    </div>
+                </div>
+                <div id="pets-grid-container">
+                    </div>
+
+                <div id="no-pets-message" style="display: none;">
+                    <p>You don't have pets yet :(( Add them first!</p>
+                </div>
+                <div id="not-logged-in" style="display: none;">
+                    <p>You are not logged in, log in first!</p>
+                </div>
+
+                <button class="add-pet-btn" id="add-pet-btn" onclick="openPetForm()">+<span class="add-pet-tooltip">Add Pet</span></button>
+
+                <div id="addPetModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closePetForm()">&times;</span>
+                        <h2>Add a New Pet</h2>
+                        <form id="addPetForm" enctype="multipart/form-data">
+                            <label for="petImage">Pet Picture:</label>
+                            <input type="file" id="petImage" name="petImage" accept="image/*" required><br>
+                            <div id="petImagePreview" style="display:none; margin-top:10px;">
+                                <img id="previewImg" src="#" alt="Pet Preview" style="max-width:200px; max-height:200px;">
+                            </div>
+
+                            <label for="petName">Name:</label>
+                            <input type="text" id="petName" name="name" placeholder="Enter pet's name" required><br>
+
+                            <label for="petType">Type:</label>
+                            <input type="text" id="petType" name="type" placeholder="e.g., Dog, Cat" required><br>
+
+                            <label for="petBreed">Breed:</label>
+                            <input type="text" id="petBreed" name="breed" placeholder="Enter breed"><br>
+
+                            <label for="petBirthdate">Birthdate:</label>
+                            <input type="date" id="petBirthdate" name="birthdate"><br>
+
+                            <label>Sex:</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="sex" value="Male" required> Male
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="sex" value="Female"> Female
+                                </label>
+                            </div><br><br>
+
+                            <label for="petAbout">About:</label>
+                            <textarea id="petAbout" name="about" rows="3" placeholder="Tell us about your pet..."></textarea><br>
+
+                            <button type="submit">Add Pet</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="petDetailsModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closePetDetailsModal()">&times;</span>
+                        <h2>Pet Details</h2>
+                        <input type="hidden" id="edit-pet-id" name="petId">
+
+                        <form id="editPetForm">
+                            <div class="pet-detail-image-container">
+                                <img id="pet-detail-image" src="" alt="Pet Image">
+                                <input type="file" id="edit-pet-image-upload" name="petImage" accept="image/*" class="edit-mode-only">
+                            </div>
+                            <div class="detail-group">
+                                <strong>Name:</strong>
+                                <span id="pet-detail-name" class="view-mode-only"></span>
+                                <input type="text" id="edit-pet-name" name="name" class="edit-mode-only input-field">
+                            </div>
+                            <div class="detail-group">
+                                <strong>Type:</strong>
+                                <span id="pet-detail-type" class="view-mode-only"></span>
+                                <input type="text" id="edit-pet-type" name="type" class="edit-mode-only input-field">
+                            </div>
+                            <div class="detail-group">
+                                <strong>Breed:</strong>
+                                <span id="pet-detail-breed" class="view-mode-only"></span>
+                                <input type="text" id="edit-pet-breed" name="breed" class="edit-mode-only input-field">
+                            </div>
+                            <div class="detail-group">
+                                <strong>Birthdate:</strong>
+                                <span id="pet-detail-birthdate" class="view-mode-only"></span>
+                                <input type="date" id="edit-pet-birthdate" name="birthdate" class="edit-mode-only input-field">
+                            </div>
+                            <div class="detail-group">
+                                <strong>Sex:</strong>
+                                <span id="pet-detail-sex" class="view-mode-only"></span>
+                                <div class="edit-mode-only radio-group">
+                                    <label class="radio-option"><input type="radio" name="sex" value="Male"> Male</label>
+                                    <label class="radio-option"><input type="radio" name="sex" value="Female"> Female</label>
+                                </div>
+                            </div>
+                            <div class="detail-group">
+                                <strong>About:</strong>
+                                <span id="pet-detail-about" class="view-mode-only"></span>
+                                <textarea id="edit-pet-about" name="about" rows="3" class="edit-mode-only input-field"></textarea>
+                            </div>
+
+                            <div class="modal-buttons">
+                                <button type="button" id="edit-pet-button" class="edit-btn view-mode-only">Edit</button>
+                                <button type="button" id="delete-pet-button" class="delete-btn view-mode-only">Delete</button>
+                                <button type="submit" id="save-pet-button" class="save-btn edit-mode-only">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>2025 PawLog. Samantha Shaina Julia N. Badelles | CCC151 IT2D Final Project</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="pets.js"></script>
+</body>
+</html>

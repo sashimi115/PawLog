@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawLog - Backup Data</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <div class="page-wrapper">
+        <div class="topbar">
+            <div class="navbar">
+                <a href="index.html" class="navbar-title">
+                    <img src="images/paw-icon.png" alt="Paw Icon" class="paw-icon">
+                    PAWLOG
+                </a>
+                <a href="profilepage.html" class="nav-item">PROFILE</a>
+                <a href="pets.html" class="nav-item">PETS</a>
+                <div class="dropdown">
+                    <div class="dropdown-btn">SERVICES <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="vaccination.html" class="dropdown-item">Vaccinations</a>
+                        <a href="feedinglogs.html" class="dropdown-item">Feeding Logs</a>
+                        <a href="vetvisits.html" class="dropdown-item">Vet Visits</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="dropdown-btn">DATA <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="exportdata.html" class="dropdown-item">Export Data</a>
+                        <a href="backup.html" class="dropdown-item active">Backup Data</a>
+                    </div>
+                </div>
+                <a href="loginpage.html" id="signInOutButton" class="nav-item sign-in-btn">SIGN IN</a>
+            </div>
+        </div>
+        <div class="main-content" style="background-image: url(images/background%204.png); background-size: cover; background-position: center; padding: 20px;">
+
+            <div id="not-logged-in" class="message" style="display: none; text-align: center; margin-top: 50px;">
+                <p>You need to be logged in to backup your data.</p>
+            </div>
+
+            <div id="backup-content" style="display: none;">
+                <h1>Manual Data Backup</h1>
+                <h1 id="welcome-header" class="welcome-message" style="display: none; margin-top: 10px;"></h1>
+
+
+                <p style="margin-top: 20px;">Click the button below to trigger a manual backup of your PawLog data (database and uploaded files).</p>
+                <p>The backup files will be saved on the server in the configured backup directory.</p>
+
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button id="trigger-backup-btn" class="add-record-btn">Trigger Backup Now</button>
+                </div>
+
+                <div id="backup-status" style="margin-top: 20px; text-align: center; font-weight: bold;"></div>
+
+            </div>
+            </div>
+        <footer class="footer">
+            <div class="footer-content">
+            <p>&copy; 2025 PawLog. All rights reserved.</p>
+            <p>Follow us on:
+                <a href="#" class="footer-link"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="footer-link"><i class="fa fa-instagram"></i></a>
+                <a href="#" class="footer-link"><i class="fa fa-twitter"></i></a>
+            </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="backup.js"></script>
+</body>
+</html>

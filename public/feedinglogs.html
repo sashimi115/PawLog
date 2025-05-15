@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawLog - Feeding Logs</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="topbar">
+            <div class="navbar">
+                <a href="index.html" class="navbar-title">
+                    <img src="images/paw-icon.png" alt="Paw Icon" class="paw-icon">
+                    PAWLOG
+                </a>
+                <a href="profilepage.html" class="nav-item">PROFILE</a>
+                <a href="pets.html" class="nav-item">PETS</a>
+                <div class="dropdown">
+                    <div class="dropdown-btn">SERVICES <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="vaccination.html" class="dropdown-item">Vaccinations</a>
+                        <a href="vetvisits.html" class="dropdown-item">Vet Visits</a>
+                        <a href="feedinglogs.html" class="dropdown-item active">Feeding Logs</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="dropdown-btn">DATA <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="exportdata.html" class="dropdown-item">Export Data</a>
+                        <a href="backup.html" class="dropdown-item">Backup Data</a>
+                    </div>
+                </div>
+                <a href="loginpage.html" id="signInOutButton" class="nav-item sign-in-btn">SIGN IN</a>
+            </div>
+        </div>
+
+        <div class="main-content" style="background-image: url(images/background%204.png); background-size: cover; background-position: center;">
+            <div id="not-logged-in" class="message" style="display: none; text-align: center; margin-top: 50px;">
+                 <p>You need to be logged in to view feeding logs.</p>
+             </div>
+
+             <div id="feeding-logs-content" style="display: none; padding: 20px;">
+                 <h1>Feeding Logs</h1>
+                 <div id="no-pets-message" class="message" style="display: none; text-align: center; margin-top: 20px;">
+                     <p>You don't have any pets yet. Add a pet on the <a href="pets.html">Pets page</a> to manage their feeding logs.</p>
+                 </div>
+
+
+                 <div class="input-group">
+                      <label for="pet-select">Select Pet:</label>
+                      <select id="pet-select" class="input-field">
+                           <option value="" disabled selected>--Select a Pet--</option>
+                       </select>
+                  </div>
+
+                  <div id="select-pet-message" class="message" style="display: none; text-align: center; margin-top: 20px;">
+                      <p>Please select a pet to view their feeding logs.</p>
+                  </div>
+
+                  <h2 id="selected-pet-name-heading" style="display: none; text-align: center; margin-top: 20px;">Feeding Logs for <span id="selected-pet-name"></span></h2>
+
+
+                 <div id="no-feeding-logs-message" class="message" style="display: none; text-align: center; margin-top: 20px;">
+                      <p>No feeding logs found for this pet. Add the first one!</p>
+                  </div>
+
+                 <div id="feeding-logs-container" class="data-container" style="margin-top: 20px;">
+                      </div>
+
+                 <button class="add-record-btn" id="add-feedinglog-button" style="display: none; margin-top: 20px;">+ Add Feeding Log</button>
+
+             </div>
+
+             <div id="feedingLogModal" class="modal">
+                 <div class="modal-content">
+                      <span class="close" onclick="closeFeedingLogModal()">&times;</span>
+                      <h2 id="modal-title">Add Feeding Log</h2>
+                      <form id="feedingLogForm">
+                           <input type="hidden" id="log-id">
+                           <input type="hidden" id="modal-pet-id"> <div class="input-group">
+                                <label for="feeding-time">Feeding Date & Time:</label>
+                                <input type="datetime-local" id="feeding-time" class="input-field" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="food-type">Food Type:</label>
+                                <input type="text" id="food-type" class="input-field" placeholder="e.g. Dry Food" required> </div>
+
+                            <div class="input-group">
+                                <label for="amount">Amount (Optional):</label>
+                                <input type="text" id="amount" class="input-field" placeholder="e.g. 1 cup">
+                            </div>
+
+                             <div class="input-group">
+                                <label for="notes">Notes (Optional):</label>
+                                <textarea id="notes" class="input-field"></textarea>
+                            </div>
+
+                            <div class="modal-buttons"> <button type="submit" id="save-feedinglog-button" class="save-btn">Save Log</button> <button type="button" id="delete-feedinglog-button" class="delete-btn" style="display: none;">Delete Log</button> </div>
+                        </form>
+                    </div>
+                 </div>
+
+             </div>
+
+         <footer class="footer">
+             <div class="footer-content">
+             <p>2025 PawLog. Samantha Shaina Julia N. Badelles | CCC151 IT2D Final Project</p>
+             </div>
+         </footer>
+     </div>
+
+     <script src="feedinglogs.js"></script>
+ </body>
+ </html>

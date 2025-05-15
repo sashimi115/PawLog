@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawLog - Vaccinations</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Kodchasan&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="topbar">
+            <div class="navbar">
+                <a href="index.html" class="navbar-title">
+                    <img src="images/paw-icon.png" alt="Paw Icon" class="paw-icon">
+                    PAWLOG
+                </a>
+                <a href="profilepage.html" class="nav-item">PROFILE</a>
+                <a href="pets.html" class="nav-item">PETS</a>
+                <div class="dropdown">
+                    <div class="dropdown-btn">SERVICES <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="vaccination.html" class="dropdown-item active">Vaccinations</a>
+                        <a href="vetvisits.html" class="dropdown-item">Vet Visits</a>
+                        <a href="feedinglogs.html" class="dropdown-item">Feeding Logs</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <div class="dropdown-btn">DATA <i class="fa fa-caret-down"></i></div>
+                    <div class="dropdown-content">
+                        <a href="exportdata.html" class="dropdown-item">Export Data</a>
+                        <a href="backup.html" class="dropdown-item">Backup Data</a>
+                    </div>
+                </div>
+                <a href="loginpage.html" id="signInOutButton" class="nav-item sign-in-btn">SIGN IN</a>
+            </div>
+        </div>
+
+        <div class="main-content" style="background-image: url(images/background%204.png); background-size: cover; background-position: center;">
+            <div id="not-logged-in" class="message" style="display: none; text-align: center; margin-top: 50px;">
+                 <p>You need to be logged in to view vaccination records.</p>
+             </div>
+
+             <div id="vaccination-content" style="display: none; padding: 20px;">
+                 <h1 id="vaccination-page-title" class="welcome-message">Vaccination Records</h1>
+                 <div id="no-pets-message" class="message" style="display: none; text-align: center; margin-top: 20px;">
+                     <p>You don't have any pets yet. Add a pet on the <a href="pets.html">Pets page</a> to manage their vaccinations.</p>
+                 </div>
+
+
+                 <div class="input-group">
+                      <label for="pet-select">Select Pet:</label>
+                      <select id="pet-select" class="input-field">
+                           <option value="" disabled selected>--Select a Pet--</option>
+                       </select>
+                  </div>
+
+                 <div id="select-pet-message" style="text-align: center; margin-top: 20px;">
+                      <p>Please select a pet to view their vaccination records.</p>
+                  </div>
+
+                 <div class="controls-container" id="vaccine-controls" style="display: none; margin-top: 20px;">
+                      <div class="sort-container">
+                          <label for="sort-by">Sort by:</label>
+                          <select id="sort-by">
+                               <option value="vaccine_name">Vaccine Name</option>
+                               <option value="date_administered">Date Administered</option>
+                               <option value="next_due_date">Next Due Date</option>
+                               <option value="vet_clinic">Clinic</option>
+                               <option value="vet_in_charge">Vet In Charge</option>
+                           </select>
+                       </div>
+                       <div class="sort-direction-container">
+                           <label for="sort-direction">Order:</label>
+                           <select id="sort-direction">
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                           </select>
+                       </div>
+                       <div class="search-container">
+                           <label for="search-input">Search:</label>
+                           <input type="text" id="search-input" placeholder="Search Name, Clinic, Vet...">
+                       </div>
+                   </div>
+
+                   <div id="vaccination-records-display-area">
+                       <h2 id="selected-pet-name-heading" style="display: none;">Records for <span id="selected-pet-name"></span></h2>
+
+                       <div id="no-vaccination-message" style="display: none; text-align: center;">
+                           <p>No vaccination records found for this pet.</p>
+                       </div>
+
+                       <div id="no-records-after-filter" class="message" style="display: none; text-align: center; margin-top: 20px;">
+                           <p>No records match your current filter criteria.</p>
+                       </div>
+
+
+                       <table id="vaccination-table" style="display: none;"> <thead>
+                            <tr>
+                                <th>Vaccine Name</th>
+                                <th>Date Administered</th>
+                                <th>Next Due Date</th>
+                                <th>Clinic</th>
+                                <th>Vet In Charge</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vaccination-table-body">
+                             </tbody>
+                    </table>
+                    </div>
+                 <button class="add-record-btn" id="add-vaccination-button" style="display: none; margin-top: 20px;">+ Add Vaccination</button>
+
+            </div>
+
+            <div id="vaccinationModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeVaccinationModal()">&times;</span>
+                    <h2 id="modal-title">Add Vaccination Record</h2>
+                    <form id="vaccinationForm">
+                        <input type="hidden" id="record-id"> <input type="hidden" id="modal-pet-id"> <div class="input-group">
+                            <label for="vaccine-name">Vaccine Name:</label>
+                            <input type="text" id="vaccine-name" class="input-field" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="date-administered">Date Administered:</label>
+                            <input type="date" id="date-administered" class="input-field" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="next-due-date">Next Due Date (Optional):</label>
+                            <input type="date" id="next-due-date" class="input-field">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="vet-clinic">Vet Clinic (Optional):</label>
+                            <input type="text" id="vet-clinic" class="input-field">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="vet-in-charge">Vet In-Charge (Optional):</label>
+                            <input type="text" id="vet-in-charge" class="input-field">
+                        </div>
+
+                        <div class="modal-buttons">
+                            <button type="submit" id="save-vaccination-button" class="save-btn">Save Record</button>
+                            <button type="button" id="delete-vaccination-button" class="delete-btn" style="display: none;">Delete Record</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+             <div class="footer-content">
+             <p>2025 PawLog. Samantha Shaina Julia N. Badelles | CCC151 IT2D Final Project</p>
+             </div>
+        </footer>
+    </div>
+
+    <script src="vaccination.js"></script>
+</body>
+</html>
