@@ -13,7 +13,7 @@ const router = express.Router();
 const { execFile } = require('child_process');
 
 const app = express();
-const port = 3000;
+const port = 3306;
 const SERVER_BACKUP_SCRIPT_PATH = path.join(__dirname, 'backup.js');
 
 // Middleware
